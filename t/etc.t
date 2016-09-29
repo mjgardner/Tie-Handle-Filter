@@ -8,7 +8,7 @@ use Fcntl ':seek';
 use Tie::Handle::Filter;
 
 my @unimplemented = qw(readline getc open binmode eof tell seek);
-plan tests => 3 + @unimplemented;
+plan tests => 4 + @unimplemented;
 
 subtest 'no coderef' => sub {
     plan tests => 3;
@@ -23,6 +23,18 @@ subtest 'no coderef' => sub {
         or die "can't seek to start of anonymous storage: $!";
     my $written = join '', <$fh>;
     is $written, $expected, 'read back' or show $written;
+};
+
+subtest 'get method name' => sub {
+    plan tests => 2;
+    my $fh = _open();
+    _tie( $fh, \&_get_tied_method_name_only );
+    lives_ok { print $fh 'hello world' } 'print';
+    untie *$fh;
+    seek $fh, 0, SEEK_SET
+        or die "can't seek to start of anonymous storage: $!";
+    my $written = join '', <$fh>;
+    is $written, 'PRINT', 'found caller' or show $written;
 };
 
 subtest 'explicit syswrite arguments' => sub {
@@ -69,5 +81,12 @@ sub _open {
 
 sub _tie {
     my $fh = shift;
-    tie *$fh, 'Tie::Handle::Filter', *$fh;
+    tie *$fh, 'Tie::Handle::Filter', *$fh, shift;
+}
+
+sub _get_tied_method_name_only {
+    my $package    = ( caller 0 )[0];
+    my $subroutine = ( caller 1 )[3];
+    $subroutine =~ s/^${package}:://;
+    return $subroutine;
 }

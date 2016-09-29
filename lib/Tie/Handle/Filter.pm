@@ -168,15 +168,16 @@ sub CLOSE {
 
 =head1 BUGS AND LIMITATIONS
 
+If your function needs to know what operation was used to call it,
+consider using C<(caller 1)[3]> to determine the method used to call
+it, which will return C<Tie::Handle::Filter::PRINT>,
+C<Tie::Handle::Filter::PRINTF>, or C<Tie::Handle::Filter::WRITE> per
+L<perltie/"Tying FileHandles">.
+
 Currently this module is biased towards write-only file handles, such as
 C<STDOUT>, C<STDERR>, or ones used for logging. It does not (yet) define
 the following methods and their associated functions, so don't do them
 with file handles tied to this class.
-
-If your function needs to know what operation was used to call it,
-consider using C<[caller(1)](3)> to determine the method used to call
-it, which will return C<PRINT>, C<PRINTF>, or C<WRITE> per
-L<perltie/"Tying FileHandles">.
 
 =head2 READ
 

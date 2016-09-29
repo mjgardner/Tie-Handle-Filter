@@ -4,7 +4,7 @@ Tie::Handle::Filter - filters the output to a filehandle through a coderef
 
 # VERSION
 
-version 0.001
+version 0.002
 
 # SYNOPSIS
 
@@ -80,15 +80,16 @@ exception) if they fail, such as duplicating the file handle during a
 
 # BUGS AND LIMITATIONS
 
+If your function needs to know what operation was used to call it,
+consider using `(caller 1)[3]` to determine the method used to call
+it, which will return `Tie::Handle::Filter::PRINT`,
+`Tie::Handle::Filter::PRINTF`, or `Tie::Handle::Filter::WRITE` per
+["Tying FileHandles" in perltie](https://metacpan.org/pod/perltie#Tying-FileHandles).
+
 Currently this module is biased towards write-only file handles, such as
 `STDOUT`, `STDERR`, or ones used for logging. It does not (yet) define
 the following methods and their associated functions, so don't do them
 with file handles tied to this class.
-
-If your function needs to know what operation was used to call it,
-consider using `[caller(1)](3)` to determine the method used to call
-it, which will return `PRINT`, `PRINTF`, or `WRITE` per
-["Tying FileHandles" in perltie](https://metacpan.org/pod/perltie#Tying-FileHandles).
 
 ## READ
 

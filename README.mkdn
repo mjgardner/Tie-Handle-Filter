@@ -4,7 +4,7 @@ Tie::Handle::Filter - filters the output to a filehandle through a coderef
 
 # VERSION
 
-version 0.002
+version 0.003
 
 # SYNOPSIS
 
@@ -27,30 +27,30 @@ sent to the tied file handle and may return a transformed result.
 
 ## PRINT
 
-All arguments to `[print](https://metacpan.org/pod/perlfunc#print)` and `[say](https://metacpan.org/pod/perlfunc#say)`
+All arguments to [`print`](https://metacpan.org/pod/perlfunc#print) and [`say`](https://metacpan.org/pod/perlfunc#say)
 directed at the tied file handle are passed to the user-defined
-function, and the result is then passed to ` [print](https://metacpan.org/pod/perlfunc#print) `.
+function, and the result is then passed to [`print`](https://metacpan.org/pod/perlfunc#print).
 
 ## PRINTF
 
-The second and subsequent arguments to `[printf](https://metacpan.org/pod/perlfunc#printf)`
+The second and subsequent arguments to [`printf`](https://metacpan.org/pod/perlfunc#printf)
 (i.e., everything but the format string) directed at the tied file
 handle are passed to the user-defined function, and the result is then
-passed preceded by the format string to `[printf](https://metacpan.org/pod/perlfunc#printf)`.
+passed preceded by the format string to [`printf`](https://metacpan.org/pod/perlfunc#printf).
 
 Please note that this does not include calls to
-`[printf](https://metacpan.org/pod/perlfunc#sprintf)`.
+[`printf`](https://metacpan.org/pod/perlfunc#sprintf).
 
 ## WRITE
 
-The first argument to `[syswrite](https://metacpan.org/pod/perlfunc#syswrite)` (i.e., the buffer
+The first argument to [`syswrite`](https://metacpan.org/pod/perlfunc#syswrite) (i.e., the buffer
 scalar variable) directed at the tied file handle is passed to the
 user-defined function, and the result is then passed along with the
 optional second and third arguments (i.e., length of data in bytes and
-offset within the string) to `[syswrite](https://metacpan.org/pod/perlfunc#syswrite)`.
+offset within the string) to [`syswrite`](https://metacpan.org/pod/perlfunc#syswrite).
 
 Note that if you do not provide a length argument to
-`[syswrite](https://metacpan.org/pod/perlfunc#syswrite)`, it will be computed from the result of
+[`syswrite`](https://metacpan.org/pod/perlfunc#syswrite), it will be computed from the result of
 the user-defined function. However, if you do provide a length (and
 possibly offset), they will be relative to the results of the
 user-defined function, not the input.
@@ -73,9 +73,9 @@ user-defined function, not the input.
 
 Wherever possible this module attempts to emulate the built-in functions
 it ties, so it will return values as expected from whatever function is
-called. Certain operations may also `[croak](https://metacpan.org/pod/Carp)` (throw a fatal
+called. Certain operations may also [`croak`](https://metacpan.org/pod/Carp) (throw a fatal
 exception) if they fail, such as duplicating the file handle during a
-`[tie](https://metacpan.org/pod/perlfunc#tie)` or attempting to perform an
+[`tie`](https://metacpan.org/pod/perlfunc#tie) or attempting to perform an
 [unsupported operation](#bugs-and-limitations) on a tied file handle.
 
 # BUGS AND LIMITATIONS

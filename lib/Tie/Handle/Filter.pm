@@ -62,9 +62,9 @@ use Fcntl qw(F_GETFL O_TRUNC);
 
 Wherever possible this module attempts to emulate the built-in functions
 it ties, so it will return values as expected from whatever function is
-called. Certain operations may also C<L<croak|Carp>> (throw a fatal
+called. Certain operations may also L<C<croak>|Carp> (throw a fatal
 exception) if they fail, such as duplicating the file handle during a
-C<L<tie|perlfunc/tie>> or attempting to perform an
+L<C<tie>|perlfunc/tie> or attempting to perform an
 L<unsupported operation|/"BUGS AND LIMITATIONS"> on a tied file handle.
 
 =cut
@@ -106,9 +106,9 @@ sub _get_filehandle_open_mode {
 
 =method PRINT
 
-All arguments to C<L<print|perlfunc/print>> and C<L<say|perlfunc/say>>
+All arguments to L<C<print>|perlfunc/print> and L<C<say>|perlfunc/say>
 directed at the tied file handle are passed to the user-defined
-function, and the result is then passed to C< L<print|perlfunc/print> >.
+function, and the result is then passed to L<C<print>|perlfunc/print>.
 
 =cut
 
@@ -120,13 +120,13 @@ sub PRINT {
 
 =method PRINTF
 
-The second and subsequent arguments to C<L<printf|perlfunc/printf>>
+The second and subsequent arguments to L<C<printf>|perlfunc/printf>
 (i.e., everything but the format string) directed at the tied file
 handle are passed to the user-defined function, and the result is then
-passed preceded by the format string to C<L<printf|perlfunc/printf>>.
+passed preceded by the format string to L<C<printf>|perlfunc/printf>.
 
 Please note that this does not include calls to
-C<L<printf|perlfunc/sprintf>>.
+L<C<printf>|perlfunc/sprintf>.
 
 =cut
 
@@ -137,14 +137,14 @@ sub PRINTF {
 
 =method WRITE
 
-The first argument to C<L<syswrite|perlfunc/syswrite>> (i.e., the buffer
+The first argument to L<C<syswrite>|perlfunc/syswrite> (i.e., the buffer
 scalar variable) directed at the tied file handle is passed to the
 user-defined function, and the result is then passed along with the
 optional second and third arguments (i.e., length of data in bytes and
-offset within the string) to C<L<syswrite|perlfunc/syswrite>>.
+offset within the string) to L<C<syswrite>|perlfunc/syswrite>.
 
 Note that if you do not provide a length argument to
-C<L<syswrite|perlfunc/syswrite>>, it will be computed from the result of
+L<C<syswrite>|perlfunc/syswrite>, it will be computed from the result of
 the user-defined function. However, if you do provide a length (and
 possibly offset), they will be relative to the results of the
 user-defined function, not the input.

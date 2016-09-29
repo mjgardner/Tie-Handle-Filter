@@ -4,7 +4,7 @@ Tie::Handle::Filter - filters the output to a filehandle through a coderef
 
 # VERSION
 
-version 0.003
+version 0.004
 
 # SYNOPSIS
 
@@ -39,7 +39,7 @@ handle are passed to the user-defined function, and the result is then
 passed preceded by the format string to [`printf`](https://metacpan.org/pod/perlfunc#printf).
 
 Please note that this does not include calls to
-[`printf`](https://metacpan.org/pod/perlfunc#sprintf).
+[`sprintf`](https://metacpan.org/pod/perlfunc#sprintf).
 
 ## WRITE
 

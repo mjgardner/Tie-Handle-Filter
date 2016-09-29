@@ -126,7 +126,7 @@ handle are passed to the user-defined function, and the result is then
 passed preceded by the format string to L<C<printf>|perlfunc/printf>.
 
 Please note that this does not include calls to
-L<C<printf>|perlfunc/sprintf>.
+L<C<sprintf>|perlfunc/sprintf>.
 
 =cut
 

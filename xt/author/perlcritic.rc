@@ -1,0 +1,10 @@
+severity = brutal
+verbose = 9
+exclude = Editor::RequireEmacsFileVariables ErrorHandling::RequireUseOfExceptions
+
+[CodeLayout::RequireTidyCode]
+perltidyrc = xt/author/perltidy.rc
+
+[Documentation::RequirePodSections]
+language = en_US
+lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | METHODS | DEPENDENCIES | BUGS AND LIMITATIONS | AUTHOR | COPYRIGHT AND LICENSE

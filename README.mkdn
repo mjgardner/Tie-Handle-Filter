@@ -1,0 +1,136 @@
+# NAME
+
+Tie::Handle::Filter - filters the output to a filehandle through a coderef
+
+# VERSION
+
+version 0.001
+
+# SYNOPSIS
+
+    use Tie::Handle::Filter;
+
+    # prefix output to STDERR with standard Greenwich time
+    BEGIN {
+        tie *STDERR, 'Tie::Handle::Filter', *STDERR,
+            sub { scalar(gmtime) . ': ', @_ };
+    }
+
+# DESCRIPTION
+
+This is a small module for changing output when it is sent to a given
+file handle. By default it passes everything unchanged, but when
+provided a code reference, that reference is passed the string being
+sent to the tied file handle and may return a transformed result.
+
+# METHODS
+
+## PRINT
+
+All arguments to `[print](https://metacpan.org/pod/perlfunc#print)` and `[say](https://metacpan.org/pod/perlfunc#say)`
+directed at the tied file handle are passed to the user-defined
+function, and the result is then passed to ` [print](https://metacpan.org/pod/perlfunc#print) `.
+
+## PRINTF
+
+The second and subsequent arguments to `[printf](https://metacpan.org/pod/perlfunc#printf)`
+(i.e., everything but the format string) directed at the tied file
+handle are passed to the user-defined function, and the result is then
+passed preceded by the format string to `[printf](https://metacpan.org/pod/perlfunc#printf)`.
+
+Please note that this does not include calls to
+`[printf](https://metacpan.org/pod/perlfunc#sprintf)`.
+
+## WRITE
+
+The first argument to `[syswrite](https://metacpan.org/pod/perlfunc#syswrite)` (i.e., the buffer
+scalar variable) directed at the tied file handle is passed to the
+user-defined function, and the result is then passed along with the
+optional second and third arguments (i.e., length of data in bytes and
+offset within the string) to `[syswrite](https://metacpan.org/pod/perlfunc#syswrite)`.
+
+Note that if you do not provide a length argument to
+`[syswrite](https://metacpan.org/pod/perlfunc#syswrite)`, it will be computed from the result of
+the user-defined function. However, if you do provide a length (and
+possibly offset), they will be relative to the results of the
+user-defined function, not the input.
+
+# DEPENDENCIES
+
+## Core
+
+- [base](https://metacpan.org/pod/base)
+- [Carp](https://metacpan.org/pod/Carp)
+- [English](https://metacpan.org/pod/English)
+- [Fcntl](https://metacpan.org/pod/Fcntl)
+- [Tie::Handle](https://metacpan.org/pod/Tie::Handle)
+
+## Non-Core
+
+- [FileHandle::Fmode](https://metacpan.org/pod/FileHandle::Fmode)
+
+# DIAGNOSTICS
+
+Wherever possible this module attempts to emulate the built-in functions
+it ties, so it will return values as expected from whatever function is
+called. Certain operations may also `[croak](https://metacpan.org/pod/Carp)` (throw a fatal
+exception) if they fail, such as duplicating the file handle during a
+`[tie](https://metacpan.org/pod/perlfunc#tie)` or attempting to perform an
+[unsupported operation](#bugs-and-limitations) on a tied file handle.
+
+# BUGS AND LIMITATIONS
+
+Currently this module is biased towards write-only file handles, such as
+`STDOUT`, `STDERR`, or ones used for logging. It does not (yet) define
+the following methods and their associated functions, so don't do them
+with file handles tied to this class.
+
+If your function needs to know what operation was used to call it,
+consider using `[caller(1)](3)` to determine the method used to call
+it, which will return `PRINT`, `PRINTF`, or `WRITE` per
+["Tying FileHandles" in perltie](https://metacpan.org/pod/perltie#Tying-FileHandles).
+
+## READ
+
+- [`read`](https://metacpan.org/pod/perlfunc#read)
+- [`sysread`](https://metacpan.org/pod/perlfunc#sysread)
+
+## READLINE
+
+- [`<HANDLE>`](https://metacpan.org/pod/perlop#I-O-Operators)
+- [`readline`](https://metacpan.org/pod/perlfunc#readline)
+
+## GETC
+
+- [`getc`](https://metacpan.org/pod/perlfunc#getc)
+
+## OPEN
+
+- [`open`](https://metacpan.org/pod/perlfunc#open) (e.g., re-opening the file handle)
+
+## BINMODE
+
+- [`binmode`](https://metacpan.org/pod/perlfunc#binmode)
+
+## EOF
+
+- [`eof`](https://metacpan.org/pod/perlfunc#eof)
+
+## TELL
+
+- [`tell`](https://metacpan.org/pod/perlfunc#tell)
+
+## SEEK
+
+- [`seek`](https://metacpan.org/pod/perlfunc#seek)
+
+# AUTHOR
+
+Mark Gardner <mjgardner@cpan.org>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2016 by cPanel, Inc.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.

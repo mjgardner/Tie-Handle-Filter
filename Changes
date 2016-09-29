@@ -2,6 +2,8 @@ Revision history for perl distribution Tie-Handle-Filter
 
 {{$NEXT}}
 
+0.004     2016-09-29 14:09:48-07:00 America/Los_Angeles
+
 - Another doc bug slipped between the cracks
 
 0.003     2016-09-29 14:01:03-07:00 America/Los_Angeles

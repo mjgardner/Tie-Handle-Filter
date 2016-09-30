@@ -12,6 +12,22 @@ package Tie::Handle::Filter;
             sub { scalar(gmtime) . ': ', @_ };
     }
 
+Another example which adds prefix to each output line:
+
+    use Tie::Handle::Filter;
+
+    BEGIN {
+        my $prefix_start = 1;
+        tie *STDERR, "Tie::Handle::Filter", *STDERR,
+            sub {
+                my $res = join "", @_;
+                $res =~ s/(\R)(?=.)/$1 . gmtime().": "/eg;
+                $res =~ s/\A/            gmtime().": "/e if $prefix_start;
+                $prefix_start = $res =~ /\R\z/s ?;
+                $res;
+            };
+    }
+
 =head1 DESCRIPTION
 
 This is a small module for changing output when it is sent to a given

@@ -47,7 +47,7 @@ sent to the tied file handle and may return a transformed result.
 
 =cut
 
-use 5.016003;
+use 5.008;
 use strict;
 use warnings;
 

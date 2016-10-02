@@ -16,8 +16,17 @@ version 0.006
             sub { scalar(gmtime) . ': ', @_ };
     }
 
-Another (more complicated) example which adds prefix to each output
-line, even on multi-line output to [`print`](https://metacpan.org/pod/perlfunc#print):
+    # or prefix every output line, even on multi-line output
+    BEGIN {
+        my $prefix_start = 1;
+        tie *STDOUT, 'Tie::Handle::Filter', *STDOUT, sub {
+            my $res = join '', @_;
+            $res =~ s/(\R)(?=.)/$1 . gmtime() . ': '/eg;
+            $res =~ s/\A/            gmtime() . ': '/e if $prefix_start;
+            $prefix_start = $res =~ /\R\z/s;
+            return $res;
+        };
+    }
 
 # DESCRIPTION
 
@@ -57,19 +66,6 @@ Note that if you do not provide a length argument to
 the user-defined function. However, if you do provide a length (and
 possibly offset), they will be relative to the results of the
 user-defined function, not the input.
-
-    use Tie::Handle::Filter;
-
-    BEGIN {
-        my $prefix_start = 1;
-        tie *STDERR, 'Tie::Handle::Filter', *STDERR, sub {
-            my $res = join '', @_;
-            $res =~ s/(\R)(?=.)/$1 . gmtime() . ': '/eg;
-            $res =~ s/\A/            gmtime() . ': '/e if $prefix_start;
-            $prefix_start = $res =~ /\R\z/s;
-            return $res;
-        };
-    }
 
 # DEPENDENCIES
 

@@ -12,16 +12,10 @@ package Tie::Handle::Filter;
             sub { scalar(gmtime) . ': ', @_ };
     }
 
-Another (more complicated) example which adds prefix to each output
-line, even on multi-line output to L<C<print>|perlfunc/print>:
-
-=for test_synopsis BEGIN { untie *STDERR }
-
-    use Tie::Handle::Filter;
-
+    # or prefix every output line, even on multi-line output
     BEGIN {
         my $prefix_start = 1;
-        tie *STDERR, 'Tie::Handle::Filter', *STDERR, sub {
+        tie *STDOUT, 'Tie::Handle::Filter', *STDOUT, sub {
             my $res = join '', @_;
             $res =~ s/(\R)(?=.)/$1 . gmtime() . ': '/eg;
             $res =~ s/\A/            gmtime() . ': '/e if $prefix_start;

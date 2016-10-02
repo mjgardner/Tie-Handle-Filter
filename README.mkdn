@@ -4,7 +4,7 @@ Tie::Handle::Filter - filters the output to a filehandle through a coderef
 
 # VERSION
 
-version 0.005
+version 0.006
 
 # SYNOPSIS
 
@@ -15,6 +15,9 @@ version 0.005
         tie *STDERR, 'Tie::Handle::Filter', *STDERR,
             sub { scalar(gmtime) . ': ', @_ };
     }
+
+Another (more complicated) example which adds prefix to each output
+line, even on multi-line output to [`print`](https://metacpan.org/pod/perlfunc#print):
 
 # DESCRIPTION
 
@@ -54,6 +57,19 @@ Note that if you do not provide a length argument to
 the user-defined function. However, if you do provide a length (and
 possibly offset), they will be relative to the results of the
 user-defined function, not the input.
+
+    use Tie::Handle::Filter;
+
+    BEGIN {
+        my $prefix_start = 1;
+        tie *STDERR, 'Tie::Handle::Filter', *STDERR, sub {
+            my $res = join '', @_;
+            $res =~ s/(\R)(?=.)/$1 . gmtime() . ': '/eg;
+            $res =~ s/\A/            gmtime() . ': '/e if $prefix_start;
+            $prefix_start = $res =~ /\R\z/s;
+            return $res;
+        };
+    }
 
 # DEPENDENCIES
 

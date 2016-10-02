@@ -267,11 +267,18 @@ with file handles tied to this class.
 
 =cut
 
-sub _unimplemented {
-    my ( $package, undef, undef, $method ) = caller 0;
+my $unimplemented_ref = sub {
+## no critic (ValuesAndExpressions::ProhibitMagicNumbers)
+    my $package = ( caller 0 )[0];
+    my $method  = ( caller 1 )[3];
+    $method =~ s/\A ${package} :: //xms;
     croak "$package doesn't define a $method method";
-}
+};
 
-*OPEN = *BINMODE = *EOF = *TELL = *SEEK = \&_unimplemented;
+sub OPEN    { $unimplemented_ref->() }
+sub BINMODE { $unimplemented_ref->() }
+sub EOF     { $unimplemented_ref->() }
+sub TELL    { $unimplemented_ref->() }
+sub SEEK    { $unimplemented_ref->() }
 
 1;

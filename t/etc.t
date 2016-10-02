@@ -7,7 +7,7 @@ use Test::Most;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 
-my @unimplemented = qw(readline getc open binmode eof tell seek);
+my @unimplemented = qw(readline getc open binmode eof tell read sysread seek);
 plan tests => 4 + @unimplemented;
 
 subtest 'no coderef' => sub {
@@ -68,7 +68,17 @@ TODO: {
     for my $function_name (@unimplemented) {
         my $fh = _open();
         _tie($fh);
-        lives_ok { eval "$function_name \$fh" and die $? } $function_name;
+
+        my $buffer;
+        my $eval = "$function_name \$fh"
+            . (
+              $function_name =~ /^(?:sys)?read$/xms ? ', $buffer, 1'
+            : $function_name eq 'seek'              ? ', 0, SEEK_SET'
+            :                                         q()
+            );
+
+        lives_ok { eval $eval or die } $function_name
+            or explain $eval;
         close $fh;
     }
 }

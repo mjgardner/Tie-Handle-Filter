@@ -2,6 +2,8 @@ Revision history for perl distribution Tie-Handle-Filter
 
 {{$NEXT}}
 
+0.006     2016-10-02 00:23:06-05:00 America/Chicago
+
 - Add example to SYNOPSIS which prefixes every output line (PERLANCAR++)
 - Fix unimplemented methods to actually do and say the right thing
 

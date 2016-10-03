@@ -89,7 +89,7 @@ user-defined function, not the input.
 Wherever possible this module attempts to emulate the built-in functions
 it ties, so it will return values as expected from whatever function is
 called. Certain operations may also [`croak`](https://metacpan.org/pod/Carp) (throw a fatal
-exception) if they fail, such as duplicating the file handle during a
+exception) if they fail, such as aliasing the file handle during a
 [`tie`](https://metacpan.org/pod/perlfunc#tie) or attempting to perform an
 [unsupported operation](#bugs-and-limitations) on a tied file handle.
 

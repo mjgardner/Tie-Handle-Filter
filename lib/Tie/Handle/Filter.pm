@@ -77,7 +77,7 @@ use FileHandle::Fmode ':all';
 Wherever possible this module attempts to emulate the built-in functions
 it ties, so it will return values as expected from whatever function is
 called. Certain operations may also L<C<croak>|Carp> (throw a fatal
-exception) if they fail, such as duplicating the file handle during a
+exception) if they fail, such as aliasing the file handle during a
 L<C<tie>|perlfunc/tie> or attempting to perform an
 L<unsupported operation|/"BUGS AND LIMITATIONS"> on a tied file handle.
 
@@ -87,7 +87,7 @@ sub TIEHANDLE {
     my ( $class, $handle_glob, $writer_ref ) = @_;
 
     ## no critic (InputOutput::RequireBriefOpen)
-    open my $fh, _get_filehandle_open_mode($handle_glob) . q(&), $handle_glob
+    open my $fh, _get_filehandle_open_mode($handle_glob) . q(&=), $handle_glob
         or croak $OS_ERROR;
 
     return bless {

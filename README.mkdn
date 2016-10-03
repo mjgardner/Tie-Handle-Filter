@@ -70,16 +70,11 @@ the user-defined function. However, if you do provide a length (and
 possibly offset), they will be relative to the results of the
 user-defined function, not the input.
 
-# DEPENDENCIES
+# EXTENDS
 
-## Core
-
-- [base](https://metacpan.org/pod/base)
-- [Carp](https://metacpan.org/pod/Carp)
-- [English](https://metacpan.org/pod/English)
 - [Tie::Handle](https://metacpan.org/pod/Tie::Handle)
 
-## Non-Core
+# REQUIRES
 
 - [FileHandle::Fmode](https://metacpan.org/pod/FileHandle::Fmode)
 

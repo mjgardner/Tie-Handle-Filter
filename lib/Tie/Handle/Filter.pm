@@ -34,30 +34,6 @@ file handle. By default it passes everything unchanged, but when
 provided a code reference, that reference is passed the string being
 sent to the tied file handle and may return a transformed result.
 
-=head1 DEPENDENCIES
-
-=head2 Core
-
-=over
-
-=item L<base|base>
-
-=item L<Carp|Carp>
-
-=item L<English|English>
-
-=item L<Tie::Handle|Tie::Handle>
-
-=back
-
-=head2 Non-Core
-
-=over
-
-=item L<FileHandle::Fmode|FileHandle::Fmode>
-
-=back
-
 =cut
 
 use 5.008;

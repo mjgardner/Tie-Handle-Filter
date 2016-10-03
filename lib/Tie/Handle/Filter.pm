@@ -113,7 +113,7 @@ sub _get_filehandle_open_mode {
     return;
 }
 
-## no critic (Subroutines::RequireArgUnpacking
+## no critic (Subroutines::RequireArgUnpacking)
 ## no critic (Subroutines::RequireFinalReturn)
 
 =method PRINT

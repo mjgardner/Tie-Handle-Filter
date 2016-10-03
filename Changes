@@ -2,6 +2,8 @@ Revision history for perl distribution Tie-Handle-Filter
 
 {{$NEXT}}
 
+0.007     2016-10-03 16:07:49-05:00 America/Chicago (TRIAL RELEASE)
+
 - Conserve file descriptors by doing the equivalent of C's fdopen(3)
   rather than duplicating file handles
 - Deal with Perl 5.8's lack of a \R escape in regexps in the multi-line

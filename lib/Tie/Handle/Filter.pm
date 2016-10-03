@@ -71,7 +71,6 @@ use base 'Tie::Handle';
 use Carp;
 use English '-no_match_vars';
 use FileHandle::Fmode ':all';
-use Fcntl qw(F_GETFL O_TRUNC);
 
 =head1 DIAGNOSTICS
 
@@ -103,17 +102,14 @@ sub TIEHANDLE {
 
 sub _get_filehandle_open_mode {
     my $fh = shift;
-    my $flags = fcntl $fh, F_GETFL, 0
-        or croak "can't fcntl F_GETFL: $OS_ERROR";
     for ($fh) {
         return '>>'  if is_WO($_) and is_A($_);
         return '>'   if is_WO($_);
         return '<'   if is_RO($_);
-        return '+>'  if is_RW($_) and $flags | O_TRUNC;
         return '+>>' if is_RW($_) and is_A($_);
         return '+<'  if is_RW($_);
     }
-    return;
+    return '+>';
 }
 
 ## no critic (Subroutines::RequireArgUnpacking)

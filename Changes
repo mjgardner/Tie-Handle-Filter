@@ -4,6 +4,7 @@ Revision history for perl distribution Tie-Handle-Filter
 
 - Deal with Perl 5.8's lack of a \R escape in regexps in the multi-line
   prefix test and SYNOPSIS example
+- Remove dependency on Fcntl to support Microsoft Windows
 
 0.006     2016-10-02 00:23:06-05:00 America/Chicago
 

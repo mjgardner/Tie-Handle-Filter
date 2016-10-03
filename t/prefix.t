@@ -7,14 +7,18 @@ use Test::Most;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 
-my $prefix_start = 1;
 my $prefix       = 'FOOBAR';
+my $prefix_start = 1;
+
+# deal with perl 5.8 lack of \R
+my $newline = $] < 5.010 ? '(?>\x0D\x0A|\n)' : '\R';
+
 open my $fh, '+>', undef or die "can't create anonymous storage: $!";
 tie *$fh, 'Tie::Handle::Filter', *$fh, sub {
     my $res = join q(), @_;
-    $res =~ s/(\R)(?=.)/$1$prefix: /g;
+    $res =~ s/($newline)(?=.)/$1$prefix: /g;
     $res =~ s/\A/$prefix: / if $prefix_start;
-    $prefix_start = $res =~ /\R\z/s;
+    $prefix_start = $res =~ /$newline\z/s;
     return $res;
 };
 

@@ -14,12 +14,15 @@ package Tie::Handle::Filter;
 
     # or prefix every output line, even on multi-line output
     BEGIN {
+        # deal with perl 5.8 lack of \R
+        my $newline = $] < 5.010 ? '(?>\x0D\x0A|\n)' : '\R';
+
         my $prefix_start = 1;
         tie *STDOUT, 'Tie::Handle::Filter', *STDOUT, sub {
             my $res = join '', @_;
-            $res =~ s/(\R)(?=.)/$1 . gmtime() . ': '/eg;
+            $res =~ s/($newline)(?=.)/$1 . gmtime() . ': '/eg;
             $res =~ s/\A/            gmtime() . ': '/e if $prefix_start;
-            $prefix_start = $res =~ /\R\z/s;
+            $prefix_start = $res =~ /$newline\z/s;
             return $res;
         };
     }

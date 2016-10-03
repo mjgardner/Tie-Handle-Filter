@@ -46,8 +46,6 @@ sent to the tied file handle and may return a transformed result.
 
 =item L<English|English>
 
-=item L<Fcntl|Fcntl>
-
 =item L<Tie::Handle|Tie::Handle>
 
 =back

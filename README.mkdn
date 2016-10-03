@@ -4,7 +4,7 @@ Tie::Handle::Filter - filters the output to a filehandle through a coderef
 
 # VERSION
 
-version 0.007
+version 0.008
 
 # SYNOPSIS
 
@@ -77,7 +77,6 @@ user-defined function, not the input.
 - [base](https://metacpan.org/pod/base)
 - [Carp](https://metacpan.org/pod/Carp)
 - [English](https://metacpan.org/pod/English)
-- [Fcntl](https://metacpan.org/pod/Fcntl)
 - [Tie::Handle](https://metacpan.org/pod/Tie::Handle)
 
 ## Non-Core

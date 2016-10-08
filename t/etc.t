@@ -3,7 +3,7 @@
 use 5.008;
 use strict;
 use warnings;
-use Test::Most;
+use Test::More;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 
@@ -13,10 +13,10 @@ plan tests => 4 + @unimplemented;
 subtest 'no coderef' => sub {
     plan tests => 3;
     my $fh = _open();
-    lives_ok { _tie($fh) } 'tie';
+    ok eval { _tie($fh); 1 } => 'tie';
 
     my $expected = 'hello world';
-    lives_ok { print $fh $expected } 'print';
+    ok eval { print $fh $expected; 1 } => 'print';
 
     untie *$fh;
     seek $fh, 0, SEEK_SET
@@ -29,7 +29,7 @@ subtest 'get method name' => sub {
     plan tests => 2;
     my $fh = _open();
     _tie( $fh, \&_get_tied_method_name_only );
-    lives_ok { print $fh 'hello world' } 'print';
+    ok eval { print $fh 'hello world'; 1 } => 'print';
     untie *$fh;
     seek $fh, 0, SEEK_SET
         or die "can't seek to start of anonymous storage: $!";
@@ -45,7 +45,8 @@ subtest 'explicit syswrite arguments' => sub {
     my $input    = 'hello world';
     my $offset   = 6;
     my $expected = substr $input, $offset, 5;
-    lives_ok { syswrite $fh, $input, length $expected, $offset } 'syswrite';
+    ok eval { syswrite $fh, $input, length $expected, $offset; 1 },
+        'syswrite';
 
     untie *$fh;
     seek $fh, 0, SEEK_SET
@@ -60,7 +61,7 @@ subtest 'explicit close' => sub {
     plan tests => 1;
     my $fh = _open();
     _tie($fh);
-    lives_ok { close $fh } 'close';
+    ok eval { close $fh; 1 }, 'close';
 };
 
 TODO: {
@@ -77,7 +78,7 @@ TODO: {
             :                                         q()
             );
 
-        lives_ok { eval $eval or die } $function_name
+        ok eval { eval $eval or die; 1 } => $function_name
             or explain $eval;
         close $fh;
     }

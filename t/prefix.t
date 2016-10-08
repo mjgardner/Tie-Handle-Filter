@@ -3,7 +3,7 @@
 use 5.008;
 use strict;
 use warnings;
-use Test::Most;
+use Test::More;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 
@@ -22,8 +22,8 @@ tie *$fh, 'Tie::Handle::Filter', *$fh, sub {
     return $res;
 };
 
-lives_ok {
-    print $fh <<'END_PRINT' } 'print with prefix';
+ok eval {
+    print $fh <<'END_PRINT'; 1 } => 'print with prefix';
 hello world
 goodbye and good luck
 END_PRINT

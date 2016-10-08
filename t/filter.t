@@ -3,7 +3,7 @@
 use 5.008;
 use strict;
 use warnings;
-use Test::Most;
+use Test::More;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 
@@ -47,12 +47,13 @@ while ( my ( $filter_name, $filter_ref ) = each %filter_output ) {
                 open my $fh, '+>', undef
                     or die "can't create anonymous storage: $!";
 
-                lives_ok {
+                ok eval {
                     tie *$fh, 'Tie::Handle::Filter', *$fh, $function_ref;
-                }
-                'tie';
+                    1;
+                } => 'tie';
 
-                lives_ok { $test_operation{$operation}->($fh) } $operation;
+                ok eval { $test_operation{$operation}->($fh); 1 } =>
+                    $operation;
 
                 untie *$fh;
                 seek $fh, 0, SEEK_SET

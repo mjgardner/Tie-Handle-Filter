@@ -6,7 +6,7 @@ exclude = Documentation::RequirePodLinksIncludeText Editor::RequireEmacsFileVari
 perltidyrc = xt/author/perltidy.rc
 
 [Documentation::PodSpelling]
-stop_words = cPanel coderef filehandle BINMODE EOF GETC PRINTF READLINE
+stop_words = cPanel coderef filehandle BINMODE EOF GETC PRINTF READLINE prepend Prepends POSIX timestamp timestamps TIEHANDLE
 
 [Documentation::RequirePodSections]
 language = en_US

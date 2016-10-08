@@ -12,27 +12,28 @@ package Tie::Handle::Filter;
             sub { scalar(gmtime) . ': ', @_ };
     }
 
-    # or prefix every output line, even on multi-line output
-    BEGIN {
-        # deal with perl 5.8 lack of \R
-        my $newline = $] < 5.010 ? '(?>\x0D\x0A|\n)' : '\R';
-
-        my $prefix_start = 1;
-        tie *STDOUT, 'Tie::Handle::Filter', *STDOUT, sub {
-            my $res = join '', @_;
-            $res =~ s/($newline)(?=.)/$1 . gmtime() . ': '/eg;
-            $res =~ s/\A/            gmtime() . ': '/e if $prefix_start;
-            $prefix_start = $res =~ /$newline\z/s;
-            return $res;
-        };
-    }
-
 =head1 DESCRIPTION
 
 This is a small module for changing output when it is sent to a given
 file handle. By default it passes everything unchanged, but when
 provided a code reference, that reference is passed the string being
 sent to the tied file handle and may return a transformed result.
+
+=head1 OTHER INCLUDED MODULES
+
+=over
+
+=item L<Tie::Handle::Filter::Output::Timestamp|Tie::Handle::Filter::Output::Timestamp>
+
+Prepends filehandle output with a timestamp, optionally formatted via
+L<C<strftime>|POSIX/strftime>.
+
+=item L<Tie::Handle::Filter::Output::Timestamp::EveryLine|Tie::Handle::Filter::Output::Timestamp::EveryLine>
+
+Prepends every line of filehandle output with a timestamp, optionally
+formatted via L<C<strftime>|POSIX/strftime>.
+
+=back
 
 =cut
 

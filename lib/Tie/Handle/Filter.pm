@@ -39,12 +39,11 @@ sent to the tied file handle and may return a transformed result.
 use 5.008;
 use strict;
 use warnings;
-
-# VERSION
 use base 'Tie::Handle';
 use Carp;
 use English '-no_match_vars';
 use FileHandle::Fmode ':all';
+our $VERSION = '0.009';
 
 =head1 DIAGNOSTICS
 

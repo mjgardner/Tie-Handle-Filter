@@ -2,7 +2,8 @@ Revision history for perl distribution Tie-Handle-Filter
 
 {{$NEXT}}
 
-- Remove dependency on non-core Test::Most module and its dependencies
+- Remove dependency on non-core Test::Most module and its dependencies,
+  but added Time::Fake dependency for testing the new modules below
 - Add ::Output::Timestamp and ::Output::Timestamp::EveryLine modules
   to cover common use cases
 - Handle version updates with Dist::Zilla::Plugin::RewriteVersion and

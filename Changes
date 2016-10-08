@@ -2,6 +2,8 @@ Revision history for perl distribution Tie-Handle-Filter
 
 {{$NEXT}}
 
+0.009     2016-10-08 17:30:37-05:00 America/Chicago (TRIAL RELEASE)
+
 - Remove dependency on non-core Test::Most module and its dependencies,
   but added Time::Fake dependency for testing the new modules below
 - Add ::Output::Timestamp and ::Output::Timestamp::EveryLine modules

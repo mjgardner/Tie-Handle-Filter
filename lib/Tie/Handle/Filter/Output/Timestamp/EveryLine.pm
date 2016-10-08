@@ -8,7 +8,7 @@ use warnings;
 use base 'Tie::Handle::Filter';
 use English '-no_match_vars';
 use POSIX 'strftime';
-our $VERSION = '0.009';
+our $VERSION = '0.010';
 
 =head1 SYNOPSIS
 

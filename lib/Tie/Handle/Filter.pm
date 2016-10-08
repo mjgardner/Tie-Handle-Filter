@@ -44,7 +44,7 @@ use base 'Tie::Handle';
 use Carp;
 use English '-no_match_vars';
 use FileHandle::Fmode ':all';
-our $VERSION = '0.009';
+our $VERSION = '0.010';
 
 =head1 DIAGNOSTICS
 

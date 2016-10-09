@@ -3,7 +3,7 @@
 use 5.008;
 use strict;
 use warnings;
-use Test::More;
+use Test::More tests => 2;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 
@@ -37,5 +37,3 @@ is $written, <<"END_EXPECTED", 'lines were prefixed';
 $prefix: hello world
 $prefix: goodbye and good luck
 END_EXPECTED
-
-done_testing();

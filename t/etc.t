@@ -3,7 +3,7 @@
 use 5.008;
 use strict;
 use warnings;
-use Test::More;
+use Test::More 0.94;
 use Fcntl ':seek';
 use Tie::Handle::Filter;
 

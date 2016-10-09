@@ -4,7 +4,7 @@ use 5.008;
 use strict;
 use warnings;
 use Time::Fake;
-use Test::More;
+use Test::More tests => 2;
 use Fcntl ':seek';
 use POSIX 'strftime';
 use Tie::Handle::Filter::Output::Timestamp;
@@ -32,5 +32,3 @@ printing
 $expected_time hello world
 goodbye and good luck
 END_EXPECTED
-
-done_testing();

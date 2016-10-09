@@ -42,7 +42,7 @@ formats using ANSI C89 specifiers.
 
 =cut
 
-my $NEWLINE = $PERL_VERSION < v5.10    ## no critic (ProhibitMagicNumbers)
+my $NEWLINE = $PERL_VERSION lt 'v5.10'
     ? '(?>\x0D\x0A|\n)'    ## no critic (RequireInterpolationOfMetachars)
     : '\R';
 

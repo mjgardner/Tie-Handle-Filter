@@ -2,6 +2,8 @@ Revision history for perl distribution Tie-Handle-Filter
 
 {{$NEXT}}
 
+- Acknowledge existence of PerlIO-based solutions in documentation
+
 0.010     2016-10-08 22:46:13-05:00 America/Chicago (TRIAL RELEASE)
 
 - Do better Perl version checking for correct newline regular expression

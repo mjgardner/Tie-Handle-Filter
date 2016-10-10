@@ -4,7 +4,7 @@ Tie::Handle::Filter - filters the output to a filehandle through a coderef
 
 # VERSION
 
-version 0.010
+version 0.011
 
 # SYNOPSIS
 

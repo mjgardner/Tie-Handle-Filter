@@ -28,7 +28,7 @@ our $VERSION = '0.011';
 This class may be used with Perl's L<tie|perlfunc/tie> function to
 prepend all output with a timestamp, optionally formatted according to
 the L<POSIX C<strftime>|POSIX/strftime> function. Unlike
-L<C<Tie::Handle::Filter::Output::Timestamp>|Tie::Handle::Filter::Output::Timestamp>,
+L<Tie::Handle::Filter::Output::Timestamp|Tie::Handle::Filter::Output::Timestamp>,
 I<every> line gets a timestamp, rather than just the beginning of
 strings given to L<C<print>|perlfunc/print>,
 L<C<printf>|perlfunc/printf>, L<C<syswrite>|perlfunc/syswrite>, and
@@ -39,6 +39,11 @@ L<C<say>|perlfunc/say> (in Perl > v5.10).
 Because the date and time format is specified using
 L<C<strftime>|POSIX/strftime>, portable code should restrict itself to
 formats using ANSI C89 specifiers.
+
+=head1 SEE ALSO
+
+L<PerlIO::via::Logger>, which offers a L<PerlIO|perlapio>-based logging
+layer and may be slightly faster.
 
 =cut
 

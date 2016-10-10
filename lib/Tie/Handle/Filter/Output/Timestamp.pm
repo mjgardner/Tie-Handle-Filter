@@ -27,15 +27,18 @@ prepend all output with a timestamp, optionally formatted according to
 the L<POSIX C<strftime>|POSIX/strftime> function. Only the beginning of
 strings given to L<C<print>|perlfunc/print>,
 L<C<printf>|perlfunc/printf>, L<C<syswrite>|perlfunc/syswrite>, and
-L<C<say>|perlfunc/say> (in Perl > v5.10) get timestamps. If you want
-I<every> line prefixed, use
-L<C<Tie::Handle::Filter::Output::Timestamp::EveryLine>|Tie::Handle::Filter::Output::Timestamp::EveryLine>,
+L<C<say>|perlfunc/say> (in Perl > v5.10) get timestamps.
 
 =head1 BUGS AND LIMITATIONS
 
 Because the date and time format is specified using
 L<C<strftime>|POSIX/strftime>, portable code should restrict itself to
 formats using ANSI C89 specifiers.
+
+=head1 SEE ALSO
+
+L<Tie::Handle::Filter::Output::Timestamp::EveryLine|Tie::Handle::Filter::Output::Timestamp::EveryLine>,
+which prefixes every line.
 
 =method TIEHANDLE
 

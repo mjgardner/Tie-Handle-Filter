@@ -19,22 +19,6 @@ file handle. By default it passes everything unchanged, but when
 provided a code reference, that reference is passed the string being
 sent to the tied file handle and may return a transformed result.
 
-=head1 OTHER INCLUDED MODULES
-
-=over
-
-=item L<Tie::Handle::Filter::Output::Timestamp|Tie::Handle::Filter::Output::Timestamp>
-
-Prepends filehandle output with a timestamp, optionally formatted via
-L<C<strftime>|POSIX/strftime>.
-
-=item L<Tie::Handle::Filter::Output::Timestamp::EveryLine|Tie::Handle::Filter::Output::Timestamp::EveryLine>
-
-Prepends every line of filehandle output with a timestamp, optionally
-formatted via L<C<strftime>|POSIX/strftime>.
-
-=back
-
 =cut
 
 use 5.008;
@@ -247,5 +231,29 @@ sub BINMODE { $unimplemented_ref->() }
 sub EOF     { $unimplemented_ref->() }
 sub TELL    { $unimplemented_ref->() }
 sub SEEK    { $unimplemented_ref->() }
+
+=head1 SEE ALSO
+
+=over
+
+=item L<Tie::Handle::Filter::Output::Timestamp|Tie::Handle::Filter::Output::Timestamp>
+
+Prepends filehandle output with a timestamp, optionally formatted via
+L<C<strftime>|POSIX/strftime>.
+
+=item L<Tie::Handle::Filter::Output::Timestamp::EveryLine|Tie::Handle::Filter::Output::Timestamp::EveryLine>
+
+Prepends every line of filehandle output with a timestamp, optionally
+formatted via L<C<strftime>|POSIX/strftime>.
+
+=item L<PerlIO::via::dynamic|PerlIO::via::dynamic>
+
+A L<PerlIO|perlapio>-based approach using C<translate> and
+C<untranslate> code references to transform writes and reads,
+respectively.
+
+=back
+
+=cut
 
 1;

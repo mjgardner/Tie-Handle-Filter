@@ -63,18 +63,6 @@ user-defined function, not the input.
 
 - [FileHandle::Fmode](https://metacpan.org/pod/FileHandle::Fmode)
 
-# OTHER INCLUDED MODULES
-
-- [Tie::Handle::Filter::Output::Timestamp](https://metacpan.org/pod/Tie::Handle::Filter::Output::Timestamp)
-
-    Prepends filehandle output with a timestamp, optionally formatted via
-    [`strftime`](https://metacpan.org/pod/POSIX#strftime).
-
-- [Tie::Handle::Filter::Output::Timestamp::EveryLine](https://metacpan.org/pod/Tie::Handle::Filter::Output::Timestamp::EveryLine)
-
-    Prepends every line of filehandle output with a timestamp, optionally
-    formatted via [`strftime`](https://metacpan.org/pod/POSIX#strftime).
-
 # DIAGNOSTICS
 
 Wherever possible this module attempts to emulate the built-in functions
@@ -130,6 +118,24 @@ with file handles tied to this class.
 ## SEEK
 
 - [`seek`](https://metacpan.org/pod/perlfunc#seek)
+
+# SEE ALSO
+
+- [Tie::Handle::Filter::Output::Timestamp](https://metacpan.org/pod/Tie::Handle::Filter::Output::Timestamp)
+
+    Prepends filehandle output with a timestamp, optionally formatted via
+    [`strftime`](https://metacpan.org/pod/POSIX#strftime).
+
+- [Tie::Handle::Filter::Output::Timestamp::EveryLine](https://metacpan.org/pod/Tie::Handle::Filter::Output::Timestamp::EveryLine)
+
+    Prepends every line of filehandle output with a timestamp, optionally
+    formatted via [`strftime`](https://metacpan.org/pod/POSIX#strftime).
+
+- [PerlIO::via::dynamic](https://metacpan.org/pod/PerlIO::via::dynamic)
+
+    A [PerlIO](https://metacpan.org/pod/perlapio)-based approach using `translate` and
+    `untranslate` code references to transform writes and reads,
+    respectively.
 
 # AUTHOR
 

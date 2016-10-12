@@ -1,6 +1,6 @@
 # NAME
 
-Tie::Handle::Filter - filters the output to a filehandle through a coderef
+Tie::Handle::Filter - \[DEPRECATED\] filters filehandle output through a coderef
 
 # VERSION
 
@@ -17,6 +17,12 @@ version 0.011
     }
 
 # DESCRIPTION
+
+**DEPRECATION NOTICE:** This module distribution is deprecated in favor
+of [Text::OutputFilter](https://metacpan.org/pod/Text::OutputFilter), which is more robust while
+being functionally identical, or
+[PerlIO::via::dynamic](https://metacpan.org/pod/PerlIO::via::dynamic), which uses a different
+mechanism that may offer better performance.
 
 This is a small module for changing output when it is sent to a given
 file handle. By default it passes everything unchanged, but when
@@ -130,12 +136,6 @@ with file handles tied to this class.
 
     Prepends every line of filehandle output with a timestamp, optionally
     formatted via [`strftime`](https://metacpan.org/pod/POSIX#strftime).
-
-- [PerlIO::via::dynamic](https://metacpan.org/pod/PerlIO::via::dynamic)
-
-    A [PerlIO](https://metacpan.org/pod/perlapio)-based approach using `translate` and
-    `untranslate` code references to transform writes and reads,
-    respectively.
 
 # AUTHOR
 

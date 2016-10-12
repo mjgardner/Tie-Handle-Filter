@@ -1,6 +1,6 @@
 package Tie::Handle::Filter;
 
-# ABSTRACT: filters the output to a filehandle through a coderef
+# ABSTRACT: [DEPRECATED] filters filehandle output through a coderef
 
 =head1 SYNOPSIS
 
@@ -13,6 +13,12 @@ package Tie::Handle::Filter;
     }
 
 =head1 DESCRIPTION
+
+B<DEPRECATION NOTICE:> This module distribution is deprecated in favor
+of L<Text::OutputFilter|Text::OutputFilter>, which is more robust while
+being functionally identical, or
+L<PerlIO::via::dynamic|PerlIO::via::dynamic>, which uses a different
+mechanism that may offer better performance.
 
 This is a small module for changing output when it is sent to a given
 file handle. By default it passes everything unchanged, but when
@@ -245,12 +251,6 @@ L<C<strftime>|POSIX/strftime>.
 
 Prepends every line of filehandle output with a timestamp, optionally
 formatted via L<C<strftime>|POSIX/strftime>.
-
-=item L<PerlIO::via::dynamic|PerlIO::via::dynamic>
-
-A L<PerlIO|perlapio>-based approach using C<translate> and
-C<untranslate> code references to transform writes and reads,
-respectively.
 
 =back
 
